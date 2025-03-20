@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema version="0.1.0"
+<xsd:schema version="0.1.0.dev0"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
             xmlns:gtc="https://measurement.govt.nz/gtc/xml"
@@ -96,12 +96,12 @@
                 ```xml
                 {location}Cryogenic Radiometer{/location}
                 ```
-                
+
                 A lab of the Temperature team
                 ```xml
                 {location}MicroK 2 resistance bath{/location}
                 ```
-                
+
                 If the equipment is not at MSL (e.g., at another institute,
                 at the landfill, ...) then there is only one option available,
                 `Not at MSL`, and you should document the actual location
@@ -336,7 +336,7 @@
                 ```xml
                 MSLE.P.024
                 ```
-                
+
                 ```xml
                 MSLE.F.061
                 ```
@@ -783,7 +783,7 @@
                 ```xml
                 {maintenance/}
                 ```
-                
+
                 Some maintenance tasks are planned but none have been completed
                 ```xml
                 {maintenance}
@@ -794,7 +794,7 @@
                   {completed/}
                 {/maintenance}
                 ```
-                
+
                 Some maintenance tasks are planned and some have been completed
                 ```xml
                 {maintenance}
@@ -806,7 +806,7 @@
                   {/completed}
                 {/maintenance}
                 ```
-                
+
                 No maintenance tasks are planned and some have been completed
                 ```xml
                 {maintenance}
@@ -942,7 +942,7 @@
                 ```xml
                 {alterations/}
                 ```
-                
+
                 Some alterations have been performed
                 ```xml
                 {alterations}
@@ -1398,7 +1398,7 @@
                     {component name="Front"}
                     {component name="Rear terminal"}
                     ```
-                    
+
                     A data acquisition (DAQ) system
                     ```xml
                     {component name="AO1"}
@@ -1406,7 +1406,7 @@
                     {component name="PFI2"}
                     {component name="Counter 1"}
                     ```
-                    
+
                     A scanner or multiplexer
                     ```xml
                     {component name="Ch1"}
