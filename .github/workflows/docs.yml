@@ -29,13 +29,13 @@ jobs:
       - name: Build dev docs
         if: github.ref == 'refs/heads/main'
         run: |
-          - uv run -- build_docs.py dev
-          - echo "publish_dir=docs/build" >> "$GITHUB_ENV"
+          uv run -- build_docs.py dev
+          echo "publish_dir=docs/build" >> "$GITHUB_ENV"
       - name: Build release docs
         if: github.ref_type == 'tag'
         run: |
-          - uv run -- build_docs.py ${{ github.ref_name }}
-          - echo "publish_dir=docs/build/*" >> "$GITHUB_ENV"
+          uv run -- build_docs.py ${{ github.ref_name }}
+          echo "publish_dir=docs/build/*" >> "$GITHUB_ENV"
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
