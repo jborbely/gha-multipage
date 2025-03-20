@@ -3,10 +3,10 @@
 Accepts the name of the release as a command-line argument.
 If not specified, the name "dev" is used.
 
-Build docs to the docs/build/dev directory
+Build to the docs/build/dev directory
 $ python build_docs.py
 
-Build docs to the docs/build/v0.1.0 directory
+Build to the docs/build/v0.1.0 directory
 $ python build_docs.py v0.1.0
 """
 
