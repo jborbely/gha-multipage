@@ -1,0 +1,36 @@
+name: Docs
+
+on:
+  push:
+    branches: ['main']
+    tags:
+      - '*'
+  pull_request:
+    branches: ['main']
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    name: Build and deploy documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: false
+      - name: Build dev docs
+        if: github.ref == 'refs/heads/main'
+        run: uv run -- build_docs.py dev
+      - name: Build release docs
+        if: github.ref_type == 'tag'
+        run: uv run -- build_docs.py ${{ github.ref_name }}
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/build/*
+          keep_files: true
