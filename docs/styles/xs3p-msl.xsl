@@ -315,7 +315,6 @@
                   </xsl:otherwise>
                </xsl:choose>
             </style>
-            <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/default.min.css"/>-->
             <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"/>
             <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js" type="text/javascript" charset="UTF-8"/>
          </head>
