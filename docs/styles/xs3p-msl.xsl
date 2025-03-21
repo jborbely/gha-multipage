@@ -190,7 +190,7 @@
 
    <!-- Number of spaces to indent from parent element's start tag to
         child element's start tag -->
-   <xsl:variable name="ELEM_INDENT">3</xsl:variable>
+   <xsl:variable name="ELEM_INDENT">2</xsl:variable>
 
    <!-- Number of spaces to indent from parent element's start tag to
         attribute's tag -->
