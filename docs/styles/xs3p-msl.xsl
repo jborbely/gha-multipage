@@ -467,8 +467,7 @@
                   $.getJSON( "../versions.json", function( data ) {
                      var items = [];
                      $.each( data, function( i, version ) {
-                        console.log(version);
-                        $('.md-version__list').append('<li class="md-version__item"><a href="https://jborbely.github.io/gha-multipage/' + version + '/" class="md-version__link">' + version + '</a></li>');
+                        $('.md-version__list').append('<li class="md-version__item"><a href="../' + version + '/" class="md-version__link">' + version + '</a></li>');
                      });
 
                   });
