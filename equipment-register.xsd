@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema version="0.6.0"
+<xsd:schema version="0.6.1.dev0"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
             xmlns:gtc="https://measurement.govt.nz/gtc/xml"
@@ -18,13 +18,11 @@
 
             An Equipment Register contains information to satisfy Section 6.4 of ISO/IEC 17025:2017
             as well as Section 4.3.6 of the MSL Quality Manual.
-
-            Release of v0.6.0
         </xsd:documentation>
     </xsd:annotation>
 
     <!-- Root element -->
-    <xsd:element name="registersX">
+    <xsd:element name="registers">
         <xsd:annotation>
             <xsd:documentation>
                 Root element that contains zero or more [equipment](#type_equipment) elements.
