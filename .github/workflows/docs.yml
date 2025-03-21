@@ -55,6 +55,7 @@ jobs:
           </body>
           </html>
           EOL
+          echo "This branch is automatically maintained by a custom GitHub Actions workflow." > README.md
       - name: Deploy dev docs
         if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v4
