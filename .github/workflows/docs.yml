@@ -54,6 +54,7 @@ jobs:
           </body>
           </html>
           EOL
+          ls -la
       - name: Deploy (dev)
         uses: peaceiris/actions-gh-pages@v4
         with:
