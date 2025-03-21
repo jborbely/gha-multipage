@@ -464,7 +464,7 @@
                      }
                   });
 
-                  $.getJSON( "https://jborbely.github.io/gha-multipage/versions.json", function( data ) {
+                  $.getJSON( "../versions.json", function( data ) {
                      var items = [];
                      $.each( data, function( i, version ) {
                         console.log(version);
