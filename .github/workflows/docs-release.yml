@@ -55,4 +55,5 @@ jobs:
           publish_dir: docs/build
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: release ${{ github.ref_name }}
           keep_files: true
