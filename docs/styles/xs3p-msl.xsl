@@ -846,7 +846,7 @@ pre {
     max-width: 400px;
 }
 
-// Syntax highlighting
+<!--  Syntax highlighting -->
 .codehilite .err {color: #FFF; background-color: #D2322D; font-weight: bold;} /* Error */
 .codehilite .c   {color: #999;}
 .codehilite .cs  {color: #999; font-style: italic;}
