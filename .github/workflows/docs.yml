@@ -29,6 +29,16 @@ jobs:
       - name: Build dev docs
         if: github.ref == 'refs/heads/main'
         run: uv run -- build_docs.py dev
+      - name: Deploy dev docs
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/build
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: ${{ github.event.head_commit.message }}
+          keep_files: true
       - name: Build release docs
         if: github.ref_type == 'tag'
         run: |
@@ -55,22 +65,12 @@ jobs:
           </body>
           </html>
           EOL
-          ls -la
-      - name: Deploy build directory
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/build
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          commit_message: ${{ github.event.head_commit.message }}
-          keep_files: true
-      - name: Deploy build directory with redirect
+      - name: Deploy release docs
         if: github.ref_type == 'tag'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/build/*
+          publish_dir: docs/build
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: ${{ github.event.head_commit.message }}
