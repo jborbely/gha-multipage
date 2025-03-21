@@ -18,6 +18,8 @@
 
             An Equipment Register contains information to satisfy Section 6.4 of ISO/IEC 17025:2017
             as well as Section 4.3.6 of the MSL Quality Manual.
+
+            Added some text.
         </xsd:documentation>
     </xsd:annotation>
 
