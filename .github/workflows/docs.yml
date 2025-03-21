@@ -54,7 +54,7 @@ jobs:
           </body>
           </html>
           EOL
-      - name: Deploy
+      - name: Deploy (dev)
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -63,4 +63,13 @@ jobs:
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: ${{ github.event.head_commit.message }}
           keep_files: true
-          force_orphan: true
+      - name: Deploy release with redirect
+        if: github.ref_type == 'tag'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/build/*
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: ${{ github.event.head_commit.message }}
+          keep_files: true
