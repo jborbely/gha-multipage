@@ -31,10 +31,35 @@ jobs:
         run: uv run -- build_docs.py dev
       - name: Build release docs
         if: github.ref_type == 'tag'
-        run: uv run -- build_docs.py ${{ github.ref_name }}
+        run: |
+          uv run -- build_docs.py ${{ github.ref_name }}
+          ln -s ${{ github.ref_name }} latest
+          cat > docs/build/index.html << EOL
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <title>Redirecting</title>
+            <noscript>
+              <meta http-equiv="refresh" content="1; url=latest/" />
+            </noscript>
+            <script>
+              window.location.replace(
+                "latest/" + window.location.search + window.location.hash
+              );
+            </script>
+          </head>
+          <body>
+            Redirecting to <a href="latest/">latest/</a>...
+          </body>
+          </html>
+          EOL
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/build
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: ${{ github.event.head_commit.message }}
           keep_files: true
