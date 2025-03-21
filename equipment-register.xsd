@@ -22,7 +22,7 @@
     </xsd:annotation>
 
     <!-- Root element -->
-    <xsd:element name="register">
+    <xsd:element name="registerS">
         <xsd:annotation>
             <xsd:documentation>
                 Root element that contains zero or more [equipment](#type_equipment) elements.
