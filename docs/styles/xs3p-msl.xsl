@@ -315,7 +315,7 @@
                   </xsl:otherwise>
                </xsl:choose>
             </style>
-            <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"/>
+            <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js" type="text/javascript" charset="UTF-8"/>
             <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js" type="text/javascript" charset="UTF-8"/>
          </head>
          <body data-spy="scroll" data-target=".xs3p-sidebar" data-offset="65">
@@ -323,12 +323,6 @@
             <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
                <div class="container">
                   <div class="navbar-header">
-                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                         <span class="sr-only">Toggle navigation</span>
-                         <span class="icon-bar"><xsl:text> </xsl:text></span>
-                         <span class="icon-bar"><xsl:text> </xsl:text></span>
-                         <span class="icon-bar"><xsl:text> </xsl:text></span>
-                      </button>
                       <a class="navbar-brand xs3p-navbar-title"><xsl:value-of select="$actualTitle"/></a>
                   </div>
                </div>
@@ -469,6 +463,16 @@
                         $(".xs3p-sidebar").css("top", "65px");
                      }
                   });
+
+                  $.getJSON( "https://jborbely.github.io/gha-multipage/versions.json", function( data ) {
+                     var items = [];
+                     $.each( data, function( i, version ) {
+                        console.log(version);
+                        $('.md-version__list').append('<li class="md-version__item"><a href="https://jborbely.github.io/gha-multipage/' + version + '/" class="md-version__link">' + version + '</a></li>');
+                     });
+
+                  });
+
                ]]>
             </script>
          </body>
@@ -875,6 +879,84 @@ pre code.hljs {display:block; overflow-x:auto; padding: 5px}
         top: 65px;
         width: 22%;
     }
+}
+
+.md-version {
+    font-size: 1.5rem;
+    height: 2.4rem;
+}
+
+.md-version__current {
+    color: inherit;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+
+.md-version__list {
+    background-color: #fff;
+    border-radius: .5rem;
+    box-shadow: 2;
+    color: #000;
+    list-style-type: none;
+    margin: .8rem .8rem;
+    max-height: 0;
+    opacity: 0;
+    overflow: auto;
+    padding: 0;
+    position: relative;
+    scroll-snap-type: y mandatory;
+    top: .15rem;
+    transition: max-height 0ms .5s,opacity .25s .25s;
+    z-index: 3
+}
+
+.md-version:focus-within .md-version__list,.md-version:hover .md-version__list {
+    max-height: 10rem;
+    opacity: 1;
+    transition: max-height 0ms,opacity .25s
+}
+
+@media (hover: none),(pointer:coarse) {
+    .md-version:hover .md-version__list {
+        animation:hoverfix .25s forwards
+    }
+
+    .md-version:focus-within .md-version__list {
+        animation: none
+    }
+}
+
+.md-version__item {
+    line-height: 2.0rem
+}
+
+[dir=ltr] .md-version__link {
+    padding-left: .8rem;
+    padding-right: 1.2rem
+}
+
+[dir=rtl] .md-version__link {
+    padding-left: 1.2rem;
+    padding-right: .6rem
+}
+
+.md-version__link {
+    cursor: pointer;
+    display: block;
+    outline: none;
+    scroll-snap-align: start;
+    transition: color .25s,background-color .25s;
+    white-space: nowrap;
+    width: 100%
+}
+
+.md-version__link:focus,.md-version__link:hover {
+    color: var(--md-accent-fg-color)
+}
+
+.md-version__link:focus {
+    background-color: var(--md-default-fg-color--lightest)
 }
 </xsl:text>
    </xsl:template>
@@ -2314,7 +2396,12 @@ pre code.hljs {display:block; overflow-x:auto; padding: 5px}
                   <xsl:if test="@version">
                      <tr>
                         <th>Version</th>
-                        <td><xsl:value-of select="@version"/></td>
+                        <td>
+                           <div class="md-version">
+                              <a class="md-version__current"><xsl:value-of select="@version"/></a>
+                              <ul class="md-version__list"></ul>
+                           </div>
+                        </td>
                      </tr>
                   </xsl:if>
                   <!-- Language -->
