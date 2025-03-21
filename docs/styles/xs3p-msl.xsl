@@ -814,7 +814,7 @@ pre {
 .panel-heading .xs3p-panel-title.collapsed:after {
     content: "\e080";
 }
-.panel-info > .panel-heading .xs3p-panel-title:after {
+.panel-info &gt; .panel-heading .xs3p-panel-title:after {
     color: white;
 }
 .xs3p-panel-help {
