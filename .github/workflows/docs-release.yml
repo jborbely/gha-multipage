@@ -1,4 +1,4 @@
-name: Build and deploy release
+name: Build and deploy release docs
 
 on:
   release:
@@ -26,7 +26,7 @@ jobs:
         run: |
           uv run -- build_docs.py ${{ github.ref_name }}
           cd docs/build
-          echo "This branch is automatically maintained by a custom GitHub Actions workflow." > README.md
+          echo "This branch is automatically maintained by GitHub Actions workflows." > README.md
           ln -s ${{ github.ref_name }} latest
           cat > index.html << EOL
           <!DOCTYPE html>
