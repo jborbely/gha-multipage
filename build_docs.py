@@ -64,7 +64,7 @@ result = transform(xsd)
 result.write_output(f"build/{tag}/index.html")
 
 # Update versions.json for a release tag
-if os.getenv("GITHUB_ACTIONS") == "true" and tag.startswith("v"):
+if os.getenv("GITHUB_ACTIONS") == "true" and tag != "dev":
     import json
     from urllib.request import urlopen
     owner, repo = os.environ["GITHUB_REPOSITORY"].split("/")
