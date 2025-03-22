@@ -63,4 +63,18 @@ transform = etree.XSLT(xsl)
 result = transform(xsd)
 result.write_output(f"build/{tag}/index.html")
 
-print(f"Docs saved to docs/build/{tag}")
+# Update versions.json for a release tag
+for key, value in os.environ.items():
+    print(key, value)
+    
+if tag.startswith("v"):
+    import json
+    from urllib.request import urlopen
+    with urlopen("https://jborbely.github.io/gha-multipage/versions.json") as url:
+        versions = json.load(url)
+        versions.insert(1, tag)
+        with open("build/versions.json", "w") as fp:
+            json.dump(versions, fp, indent=4)
+            print(f"Inserted {tag!r} into build/versions.json")
+
+print(f"Saved to docs/build/{tag}")
