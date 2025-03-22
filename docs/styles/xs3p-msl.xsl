@@ -465,11 +465,10 @@
                   });
 
                   $.getJSON( "../versions.json", function( data ) {
-                     var items = [];
+                     console.log(data);
                      $.each( data, function( i, version ) {
                         $('.md-version__list').append('<li class="md-version__item"><a href="../' + version + '/" class="md-version__link">' + version + '</a></li>');
                      });
-
                   });
 
                ]]>
