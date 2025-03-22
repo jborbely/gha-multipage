@@ -80,7 +80,7 @@ if os.getenv("GITHUB_ACTIONS") == "true":
         if tag not in versions:
             versions.insert(1, tag)
             with open(version_file, "w") as fp:
-                json.dump(versions, fp, indent=1)
+                json.dump(versions, fp, indent=4)
             print(f"Inserted {tag!r} into {version_file}")
 
 
