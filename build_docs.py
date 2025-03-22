@@ -64,13 +64,11 @@ result = transform(xsd)
 result.write_output(f"build/{tag}/index.html")
 
 # Update versions.json for a release tag
-for key, value in os.environ.items():
-    print(key, value)
-    
-if tag.startswith("v"):
+if os.getenv("GITHUB_ACTIONS") == "true" and tag.startswith("v"):
     import json
     from urllib.request import urlopen
-    with urlopen("https://jborbely.github.io/gha-multipage/versions.json") as url:
+    owner, repo = os.environ["GITHUB_REPOSITORY"].split("/")
+    with urlopen(f"https://{owner}.github.io/{repo}/versions.json") as url:
         versions = json.load(url)
         versions.insert(1, tag)
         with open("build/versions.json", "w") as fp:
