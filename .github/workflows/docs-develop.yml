@@ -1,0 +1,60 @@
+name: Build and deploy develop docs
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    name: Build and deploy develop documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'oracle'
+          java-version: '21'
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: false
+      - name: Build develop docs
+        run: |
+          uv run -- build_docs.py develop
+          cd docs/build
+          echo "This branch is automatically maintained by GitHub Actions." > README.md
+          cat > index.html << EOL
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <title>Redirecting</title>
+            <noscript>
+              <meta http-equiv="refresh" content="1; url=latest/" />
+            </noscript>
+            <script>
+              window.location.replace(
+                "latest/" + window.location.search + window.location.hash
+              );
+            </script>
+          </head>
+          <body>
+            Redirecting to <a href="latest/">latest/</a>...
+          </body>
+          </html>
+          EOL
+      - name: Deploy develop docs
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/build
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: ${{ github.event.head_commit.message }}
+          keep_files: true

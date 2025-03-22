@@ -26,28 +26,7 @@ jobs:
         run: |
           uv run -- build_docs.py ${{ github.ref_name }}
           cd docs/build
-          echo "This branch is automatically maintained by GitHub Actions." > README.md
           ln -s ${{ github.ref_name }} latest
-          cat > index.html << EOL
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <meta charset="utf-8">
-            <title>Redirecting</title>
-            <noscript>
-              <meta http-equiv="refresh" content="1; url=latest/" />
-            </noscript>
-            <script>
-              window.location.replace(
-                "latest/" + window.location.search + window.location.hash
-              );
-            </script>
-          </head>
-          <body>
-            Redirecting to <a href="latest/">latest/</a>...
-          </body>
-          </html>
-          EOL
       - name: Deploy release docs
         uses: peaceiris/actions-gh-pages@v4
         with:
