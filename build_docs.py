@@ -49,7 +49,7 @@ _ = run(
     ],
 )
 
-tag = "dev" if len(sys.argv) == 1 else sys.argv[1]
+tag = "develop" if len(sys.argv) == 1 else sys.argv[1]
 shutil.rmtree(f"build/{tag}", ignore_errors=True)
 Path(f"build/{tag}/styles").mkdir(parents=True)
 
@@ -63,16 +63,25 @@ transform = etree.XSLT(xsl)
 result = transform(xsd)
 result.write_output(f"build/{tag}/index.html")
 
-# Update versions.json for a release tag
-if os.getenv("GITHUB_ACTIONS") == "true" and tag != "dev":
+# Update versions.json (only when running on GitHub Actions)
+if os.getenv("GITHUB_ACTIONS") == "true":
     import json
-    from urllib.request import urlopen
+    from urllib.request import urlopen, HTTPError
+
     owner, repo = os.environ["GITHUB_REPOSITORY"].split("/")
-    with urlopen(f"https://{owner}.github.io/{repo}/versions.json") as url:
-        versions = json.load(url)
-        versions.insert(1, tag)
-        with open("build/versions.json", "w") as fp:
-            json.dump(versions, fp, indent=4)
-            print(f"Inserted {tag!r} into build/versions.json")
+    version_file = "build/versions.json"
+    versions: list[str] = []
+    try:
+        with urlopen(f"https://{owner}.github.io/{repo}/versions.json") as url:
+            versions = json.load(url)
+    except HTTPError:
+        pass
+    finally:
+        if tag not in versions:
+            versions.insert(1, tag)
+            with open(version_file, "w") as fp:
+                json.dump(versions, fp, indent=1)
+            print(f"Inserted {tag!r} into {version_file}")
+
 
 print(f"Saved to docs/build/{tag}")

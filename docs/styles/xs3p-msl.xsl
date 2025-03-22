@@ -465,7 +465,6 @@
                   });
 
                   $.getJSON( "../versions.json", function( data ) {
-                     console.log(data);
                      $.each( data, function( i, version ) {
                         $('.md-version__list').append('<li class="md-version__item"><a href="../' + version + '/" class="md-version__link">' + version + '</a></li>');
                      });
@@ -880,8 +879,9 @@ pre code.hljs {display:block; overflow-x:auto; padding: 5px}
 }
 
 .md-version {
-    font-size: 1.5rem;
-    height: 2.4rem;
+    font-size: 1.4rem;
+    height: 2.0rem;
+    color: #337ab7;
 }
 
 .md-version__current {
@@ -898,6 +898,7 @@ pre code.hljs {display:block; overflow-x:auto; padding: 5px}
     color: #000;
     list-style-type: none;
     margin: .8rem .8rem;
+    width: 10rem;
     max-height: 0;
     opacity: 0;
     overflow: auto;
@@ -910,33 +911,14 @@ pre code.hljs {display:block; overflow-x:auto; padding: 5px}
 }
 
 .md-version:focus-within .md-version__list,.md-version:hover .md-version__list {
+    width: 10rem;
     max-height: 10rem;
     opacity: 1;
     transition: max-height 0ms,opacity .25s
 }
 
-@media (hover: none),(pointer:coarse) {
-    .md-version:hover .md-version__list {
-        animation:hoverfix .25s forwards
-    }
-
-    .md-version:focus-within .md-version__list {
-        animation: none
-    }
-}
-
 .md-version__item {
     line-height: 2.0rem
-}
-
-[dir=ltr] .md-version__link {
-    padding-left: .8rem;
-    padding-right: 1.2rem
-}
-
-[dir=rtl] .md-version__link {
-    padding-left: 1.2rem;
-    padding-right: .6rem
 }
 
 .md-version__link {
@@ -950,11 +932,7 @@ pre code.hljs {display:block; overflow-x:auto; padding: 5px}
 }
 
 .md-version__link:focus,.md-version__link:hover {
-    color: var(--md-accent-fg-color)
-}
-
-.md-version__link:focus {
-    background-color: var(--md-default-fg-color--lightest)
+    color: #F76B2F;
 }
 </xsl:text>
    </xsl:template>
