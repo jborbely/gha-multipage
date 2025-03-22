@@ -1,9 +1,9 @@
 """Build the documentation to the docs/build directory.
 
 Accepts the name of the release as a command-line argument.
-If not specified, the name "dev" is used.
+If not specified, the name "develop" is used.
 
-Build to the docs/build/dev directory
+Build to the docs/build/develop directory
 $ python build_docs.py
 
 Build to the docs/build/v0.1.0 directory
